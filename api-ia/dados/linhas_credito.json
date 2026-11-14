@@ -1,0 +1,45 @@
+{
+  "fonte": "https://www.gov.br/mda/pt-br/acesso-a-informacao/acoes-e-programas/programas-projetos-acoes-obras-e-atividades/plano-safra-da-agricultura-familiar/documentos/Pronaf20262027ResumoLinhas.pdf",
+  "vigencia": {
+    "inicio": "2026-07-01",
+    "fim": "2027-06-30"
+  },
+  "linhas": [
+    {
+      "id": "pronaf_a",
+      "nome": "Pronaf A",
+      "publico": ["reforma_agraria", "indigena", "quilombola"],
+      "finalidades": ["investimento"],
+      "limite": 55000,
+      "juros_ano": 0.5,
+      "observacao": "Bônus de adimplência de até 40% de desconto para quem paga em dia."
+    },
+    {
+      "id": "pronaf_investimento",
+      "nome": "Pronaf Investimento",
+      "publico": null,
+      "finalidades": ["investimento"],
+      "limite": 100000,
+      "juros_ano": 2.0,
+      "observacao": "Taxa reduzida de 3% para 2% ao ano na safra 2026/2027."
+    },
+    {
+      "id": "pronaf_mais_alimentos_maquinas_pequenas",
+      "nome": "Pronaf Mais Alimentos (máquinas pequenas)",
+      "publico": null,
+      "finalidades": ["maquinas"],
+      "limite": 120000,
+      "juros_ano": 1.5,
+      "observacao": "Taxa reduzida de 2,5% para 1,5% ao ano na safra 2026/2027."
+    },
+    {
+      "id": "pronaf_b_habitacao",
+      "nome": "Pronaf B Habitação",
+      "publico": null,
+      "finalidades": ["habitacao"],
+      "limite": 10000,
+      "juros_ano": 0.5,
+      "observacao": "Exige enquadramento no Pronaf B (famílias de menor renda). Para reformas e instalações sanitárias, prazo de cinco anos."
+    }
+  ]
+}
