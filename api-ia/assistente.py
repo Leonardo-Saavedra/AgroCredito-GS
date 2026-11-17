@@ -100,6 +100,7 @@ def conversar(pergunta: str, perfil: dict, conversa_id: str | None = None):
             input=resultados,
             tools=criar_ferramentas(),
             system_instruction=system,
+            timeout=30,
         )
 
     texto = interaction.output_text or "Desculpe, não consegui processar sua pergunta."

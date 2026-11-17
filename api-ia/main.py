@@ -1,6 +1,7 @@
 import logging
 
 from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 
 from assistente import conversar
 from schemas import ChatRequest, ChatResponse
@@ -12,6 +13,13 @@ app = FastAPI(
     title="AgroCrédito IA API",
     description="API de inteligência artificial que orienta pequenos produtores sobre crédito rural.",
     version="1.0.0"
+)
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:5173", "http://127.0.0.1:5173"],
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 

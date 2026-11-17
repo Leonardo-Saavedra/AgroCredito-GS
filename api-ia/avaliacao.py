@@ -4,7 +4,6 @@ from pathlib import Path
 
 import config
 from assistente import conversar
-from documentos import DOCUMENTOS
 from ferramentas import executar_ferramenta
 from rag import buscar_documentos
 
