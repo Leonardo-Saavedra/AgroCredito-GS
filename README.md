@@ -105,25 +105,44 @@ Decisões de projeto:
 
 ## Como executar
 
-Requisitos: Python 3, uma chave da API do Gemini e, para a tela de demonstração, Node.js.
+Requisitos: Git, Python (testado com a versão 3.14), Node.js (testado com a versão 26, apenas para a tela de demonstração) e uma chave da API do Gemini, que pode ser criada no Google AI Studio.
+
+### 1. Baixar o projeto
 
 ```
 git clone https://github.com/Leonardo-Saavedra/AgroCredito-GS.git
-cd AgroCredito-GS/api-ia
+cd AgroCredito-GS
+```
+
+### 2. API de IA (terminal 1)
+
+Windows (PowerShell):
+
+```
+cd api-ia
 python -m venv .venv
 .\.venv\Scripts\Activate.ps1
 pip install -r requirements.txt
+Copy-Item .env.example .env
 ```
 
-As versões das dependências estão fixadas em `requirements.txt`.
+Mac e Linux:
 
-Configuração das credenciais: copie `.env.example` para `.env` e preencha a chave.
+```
+cd api-ia
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+cp .env.example .env
+```
+
+Abra o arquivo `api-ia/.env` e troque `sua_chave_aqui` pela chave:
 
 ```
 GEMINI_API_KEY=sua_chave_aqui
 ```
 
-O arquivo `.env` está no `.gitignore` e nunca deve ser enviado ao repositório.
+O arquivo `.env` está no `.gitignore` e nunca deve ser enviado ao repositório. As versões das dependências estão fixadas em `requirements.txt`.
 
 Subir a API:
 
@@ -131,11 +150,11 @@ Subir a API:
 uvicorn main:app --reload
 ```
 
-A documentação interativa fica em `http://127.0.0.1:8000/docs`.
+A API fica em `http://127.0.0.1:8000`, e a documentação interativa em `http://127.0.0.1:8000/docs`.
 
-### Interface de demonstração (frontend)
+### 3. Tela de demonstração (terminal 2)
 
-Tela de chat em React (Vite) que consome a API. Requer Node.js. Com a API rodando, abra outro terminal, na raiz do repositório (pasta AgroCredito-GS), e execute:
+Tela de chat em React (Vite) que consome a API. Com a API rodando, abra outro terminal na raiz do repositório (pasta `AgroCredito-GS`) e execute:
 
 ```
 cd frontend
@@ -144,6 +163,8 @@ npm run dev
 ```
 
 Acesse `http://localhost:5173/`. A tela envia o perfil e a pergunta para `POST /chat` em `http://127.0.0.1:8000` e mostra a resposta, as fontes e as ferramentas usadas. A API libera CORS apenas para essa origem local.
+
+A primeira pergunta depois de ligar a API demora um pouco mais, porque os embeddings dos documentos são gerados nesse momento.
 
 ## Contrato da API
 
@@ -220,6 +241,9 @@ O valor da simulação foi conferido manualmente: R$ 50.000 a 1,5% ao ano em 36 
 - Nas conversas, a pergunta, o perfil e o contexto são enviados à API do Gemini, e por isso não devem conter dados pessoais sensíveis.
 - O modelo pode acrescentar informações que não estão na base de conhecimento, mesmo com a instrução de usar apenas o contexto. Em um teste, ele indicou o sindicato rural como fonte de ajuda, o que não consta nos documentos. O RAG e o prompt reduzem esse risco, mas não o eliminam.
 - Quando o valor desejado não está no perfil nem na pergunta, o modelo pode assumir um valor por conta própria. Em um teste, ele simulou o limite da linha (R$ 120 mil). Informar o valor no perfil evita isso.
+- As fontes exibidas mostram os documentos que o RAG recuperou para a pergunta, e não necessariamente os que o modelo usou em cada trecho da resposta.
+- Quando a finalidade não é informada no perfil, a compatibilidade considera todas as finalidades, e o Pronaf B Habitação pode aparecer como compatível sem que o enquadramento no Pronaf B tenha sido confirmado.
+- A solução depende de conexão com a internet e com a API do Gemini, e não há modo offline.
 
 ## Uso responsável
 
